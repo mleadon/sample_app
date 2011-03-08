@@ -5,7 +5,7 @@ describe PagesController do
 
 
   before(:each) do
-    @base_title = "Michael's Sample App "
+    @base_title = "Tweet Post "
    
   end
 

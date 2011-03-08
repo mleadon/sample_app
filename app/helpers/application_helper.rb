@@ -2,7 +2,7 @@ module ApplicationHelper
 
   # Return a title on a per-page basis.
   def title
-    base_title = "Michael's Sample App"
+    base_title = "Tweet Post"
     if @title.nil?
       base_title
     else
@@ -11,6 +11,9 @@ module ApplicationHelper
   end
   def cirmLogo
     return image_tag("hoodie.jpg", :alt => "Sample App", :class => "round", :width => "100") 
+  end
+  def tweetPostLogo
+    return image_tag("TweetPostLogo.gif", :alt => "Tweet Post", :class => "round", :width => "100") 
   end
 end
 

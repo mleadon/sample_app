@@ -32,17 +32,37 @@ class User < ActiveRecord::Base
                   	:confirmation => true,
                   	:length       => { :within => 6..40 }
 
-	before_save  :encrypt_password
+	before_save  :encrypt_password  
+
+  def self.authenticate(email, submitted_password)
+    user = find_by_email(email)
+    return nil  if user.nil?
+    return user if user.has_password?(submitted_password)
+    return nil
+  end
+
 
   	def has_password?(submitted_password)
     		encrypted_password == encrypt(submitted_password)
   	end
 
-  	def self.authenticate(email, submitted_password)
- 	  user = find_by_email(email)
-  	  return nil  if user.nil?
-  	  return user if user.has_password?(submitted_password)
-  	end
+  	#def self.authenticate(email, submitted_password)
+ 	#  user = find_by_email(email)
+  	#  return nil  if user.nil?
+  	#  return user if user.has_password?(submitted_password)
+  	#end
+
+  def self.authenticate(email, submitted_password)
+    user = find_by_email(email)
+    if user.nil?
+      nil
+    elsif user.has_password?(submitted_password)
+      user
+    else
+      nil
+    end
+  end
+
 
   	private
 
